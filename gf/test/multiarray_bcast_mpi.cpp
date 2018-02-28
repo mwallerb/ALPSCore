@@ -28,7 +28,7 @@ class GfMultiArrayTest : public ::testing::Test {
         rank_=alps::mpi::communicator().rank();
         is_root_=(rank_==MASTER);
         
-        for (data_type::index i=0; i<ref_data_.num_elements(); ++i) {
+        for (data_type::index i=0; i<(ptrdiff_t)ref_data_.num_elements(); ++i) {
             *(ref_data_.origin()+i)=std::complex<double>(i+0.5,i-0.5);
         }
         std::copy(ref_data_.shape(), ref_data_.shape()+ref_data_.num_dimensions(), ref_shape_.begin());

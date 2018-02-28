@@ -74,8 +74,8 @@ struct AccumulatorStatTest : public testing::Test {
     // This "naive" test is correct only for non-binning accumulators or for a large random data stream
     void testError() {
         if (is_mean_acc) {
-            EXPECT_ANY_THROW( value_type aerr=gen.accumulator().template error<value_type>() );
-            EXPECT_ANY_THROW( value_type rerr=gen.result().template error<value_type>() );
+            EXPECT_ANY_THROW( (value_type)gen.accumulator().template error<value_type>() );
+            EXPECT_ANY_THROW( (value_type)gen.result().template error<value_type>() );
             return;
         }
         value_type aerr=gen.accumulator().template error<value_type>();

@@ -110,7 +110,7 @@ TEST(mc, sum_mpi){
             {
                 const my_sim_type::double_vector_type& vv_mean=results["VValue1"].mean<my_sim_type::double_vector_type>();
                 const my_sim_type::double_vector_type& vv_err=results["VValue1"].error<my_sim_type::double_vector_type>();
-                EXPECT_EQ(my_sim_type::VSIZE+0, vv_mean.size());
+                EXPECT_EQ((size_t)my_sim_type::VSIZE+0u, vv_mean.size());
                 for (int i=0; i<my_sim_type::VSIZE; ++i) {
                     EXPECT_NEAR(expected_mean, vv_mean[i], 1.E-2) << "Vector (NoBinning) mean is incorrect at #" << i;
                     EXPECT_NEAR(expected_err, vv_err[i], 1.E-2)  << "Vector (NoBinning) error is incorrect at #" << i;
@@ -121,7 +121,7 @@ TEST(mc, sum_mpi){
             {
                 const my_sim_type::double_vector_type& vv_mean=results["VValue"].mean<my_sim_type::double_vector_type>();
                 const my_sim_type::double_vector_type& vv_err=results["VValue"].error<my_sim_type::double_vector_type>();
-                EXPECT_EQ(my_sim_type::VSIZE+0, vv_mean.size());
+                EXPECT_EQ((size_t)my_sim_type::VSIZE+0u, vv_mean.size());
                 for (int i=0; i<my_sim_type::VSIZE; ++i) {
                     EXPECT_NEAR(expected_mean, vv_mean[i], 1.E-2)  << "Vector (FullBinning) mean is incorrect at #" << i;
                     EXPECT_NEAR(expected_err, vv_err[i], 1.E-2) << "Vector (FullBinning) error is incorrect at #" << i;
