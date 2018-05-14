@@ -111,7 +111,7 @@ void batch_acc<T>::set_num_batches(size_t num_batches)
 }
 
 template <typename T>
-void batch_acc<T>::add(const computed<T> &source, size_t count)
+void batch_acc<T>::add(const internal::computed<T> &source, size_t count)
 {
     internal::check_valid(*this);
 

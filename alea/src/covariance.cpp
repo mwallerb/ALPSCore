@@ -114,7 +114,7 @@ void cov_acc<T,Str>::set_batch_size(size_t batch_size)
 }
 
 template <typename T, typename Str>
-void cov_acc<T,Str>::add(const computed<value_type> &source, size_t count)
+void cov_acc<T,Str>::add(const internal::computed<value_type> &source, size_t count)
 {
     internal::check_valid(*this);
     source.add_to(view<T>(current_.sum().data(), current_.size()));

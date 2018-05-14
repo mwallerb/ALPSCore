@@ -5,9 +5,7 @@
  */
 #pragma once
 
-#include <alps/alea/core.hpp>
-#include <alps/alea/util.hpp>
-#include <alps/alea/computed.hpp>
+#include <alps/alea/accumulator.hpp>
 
 #include <memory>
 
@@ -119,7 +117,7 @@ public:
     size_t size() const { return size_; }
 
     /** Add computed vector to the accumulator */
-    mean_acc &operator<<(const computed<T> &src) { add(src, 1); return *this; }
+    mean_acc &operator<<(const internal::computed<T> &src) { add(src, 1); return *this; }
 
     /** Merge partial result into accumulator */
     mean_acc &operator<<(const mean_result<T> &result);
@@ -137,7 +135,7 @@ public:
     const mean_data<T> &store() const { return *store_; }
 
 protected:
-    void add(const computed<T> &source, size_t count);
+    void add(const internal::computed<T> &source, size_t count);
 
     void finalize_to(mean_result<T> &result);
 

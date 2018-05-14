@@ -5,9 +5,7 @@
  */
 #pragma once
 
-#include <alps/alea/core.hpp>
-#include <alps/alea/computed.hpp>
-#include <alps/alea/util.hpp>
+#include <alps/alea/accumulator.hpp>
 #include <alps/alea/internal/galois.hpp>
 #include <alps/alea/var_strategy.hpp>
 
@@ -113,7 +111,7 @@ public:
     size_t num_batches() const { return num_batches_; }
 
     /** Add computed vector to the accumulator */
-    batch_acc& operator<<(const computed<T>& src){ add(src, 1); return *this; }
+    batch_acc& operator<<(const internal::computed<T>& src){ add(src, 1); return *this; }
 
     /** Merge partial result into accumulator */
     batch_acc &operator<<(const batch_result<T> &result);
@@ -137,7 +135,7 @@ public:
     size_t current_batch_size() const { return base_size_ * cursor_.factor(); }
 
 protected:
-    void add(const computed<T> &source, size_t count);
+    void add(const internal::computed<T> &source, size_t count);
 
     void next_batch();
 

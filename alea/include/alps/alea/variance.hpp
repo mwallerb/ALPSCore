@@ -5,11 +5,9 @@
  */
 #pragma once
 
-#include <alps/alea/core.hpp>
-#include <alps/alea/util.hpp>
+#include <alps/alea/accumulator.hpp>
 #include <alps/alea/bundle.hpp>
 #include <alps/alea/complex_op.hpp>
-#include <alps/alea/computed.hpp>
 #include <alps/alea/var_strategy.hpp>
 
 #include <memory>
@@ -148,7 +146,7 @@ public:
     size_t batch_size() const { return current_.target(); }
 
     /** Add computed vector to the accumulator */
-    var_acc &operator<<(const computed<T> &src) { add(src, 1, nullptr); return *this; }
+    var_acc &operator<<(const internal::computed<T> &src) { add(src, 1, nullptr); return *this; }
 
     /** Merge partial result into accumulator */
     var_acc &operator<<(const var_result<T,Strategy> &result);
@@ -168,7 +166,7 @@ public:
     const var_data<T,Strategy> &store() const { return *store_; }
 
 protected:
-    void add(const computed<T> &source, size_t count, var_acc *cascade);
+    void add(const internal::computed<T> &source, size_t count, var_acc *cascade);
 
     void add_bundle(var_acc *cascade);
 

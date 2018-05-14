@@ -59,7 +59,7 @@ void autocorr_acc<T>::add_level()
 }
 
 template <typename T>
-void autocorr_acc<T>::add(const computed<T> &source, size_t count)
+void autocorr_acc<T>::add(const internal::computed<T> &source, size_t count)
 {
     assert(count_ < nextlevel_);
     internal::check_valid(*this);

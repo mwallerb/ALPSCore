@@ -5,8 +5,7 @@
  */
 #pragma once
 
-#include <alps/alea/core.hpp>
-#include <alps/alea/util.hpp>
+#include <alps/alea/accumulator.hpp>
 #include <alps/alea/variance.hpp>
 
 #include <vector>
@@ -92,7 +91,7 @@ public:
     size_t size() const { return size_; }
 
     /** Add computed vector to the accumulator */
-    autocorr_acc& operator<<(const computed<T>& src){ add(src, 1); return *this; }
+    autocorr_acc& operator<<(const internal::computed<T>& src){ add(src, 1); return *this; }
 
     /** Merge partial result into accumulator */
     autocorr_acc &operator<<(const autocorr_result<T> &result);
@@ -111,7 +110,7 @@ public:
     const level_acc_type &level(size_t i) const { return level_[i]; }
 
 protected:
-    void add(const computed<T> &source, size_t count);
+    void add(const internal::computed<T> &source, size_t count);
 
     void add_level();
 

@@ -44,6 +44,14 @@ template<typename T> struct is_alea_acc : std::false_type {};
 template<typename T> struct is_alea_result : std::false_type {};
 
 /**
+ * Allows adding custom types to accumulators
+ *
+ * TODO: more docs
+ */
+template <typename T>
+struct is_custom_addable : std::false_type { };
+
+/**
  * Data view as a thin wrapper around a continuous array.
  *
  * Basically collects a pointer continuous array together with its size.  Note
@@ -133,52 +141,6 @@ private:
     size_t ndim_;
 };
 
-/**
- * Interface for a computed result (a result computed on-the-fly).
- *
- * As a trivial example, here is a vector-valued estimator of size 2 that
- * always adds the vector [1.0, -1.0] to the buffer:
- *
- *     struct trivial_computed : public computed<double>
- *     {
- *         size_t size() const { return 2; }
- *         void add_to(view<T> out) { out[0] += 1.0; out[1] -= 1.0; }
- *     }
- *
- * If a `computed` is passed to an accumulator, the accumulator will call the
- * `add_to()` method zero or more times with different buffers.  This allows
- * to avoid temporaries, as the addend can be constructed in-place, which also
- * allows for sparse data.  Also, as there is usually a bin size > 1, adding is
- * the fundamental operation.
- *
- * See also: computed_wrapper<T>
- */
-template <typename T>
-struct computed
-{
-    typedef T value_type;
-
-    /** Number of elements of the computed result */
-    virtual size_t size() const = 0;
-
-    /** Return the shape of the data - product must equal size */
-    virtual std::vector<size_t> shape() const { return std::vector<size_t>(1, size()); }
-
-    /**
-     * Add computed result data to the buffer in `out`.  If `in(i)` is the
-     * `i`-th component of the estimator, do the equivalent of:
-     *
-     *     for (size_t i = 0; i != size(); ++i)
-     *         out[i] += in(i);
-     */
-    virtual void add_to(view<T> out) const = 0;
-
-    /** Returns a clone of the estimator (optional) */
-    virtual computed *clone() { throw unsupported_operation(); }
-
-    /** Destroy estimator */
-    virtual ~computed() { }
-};
 
 /**
  * Shorthand for Eigen column vector

@@ -1,6 +1,4 @@
 #include <alps/alea/mean.hpp>
-#include <alps/alea/util.hpp>
-#include <alps/alea/computed.hpp>
 #include <alps/alea/serialize.hpp>
 
 #include <alps/alea/internal/util.hpp>
@@ -53,7 +51,7 @@ mean_acc<T> &mean_acc<T>::operator=(const mean_acc &other)
 }
 
 template <typename T>
-void mean_acc<T>::add(const computed<T> &source, size_t count)
+void mean_acc<T>::add(const internal::computed<T> &source, size_t count)
 {
     internal::check_valid(*this);
     source.add_to(view<T>(store_->data().data(), size()));

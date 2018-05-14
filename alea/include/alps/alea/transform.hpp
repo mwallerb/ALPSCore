@@ -6,7 +6,6 @@
 #pragma once
 
 #include <alps/alea/core.hpp>
-#include <alps/alea/computed.hpp>
 
 #include <alps/alea/mean.hpp>
 #include <alps/alea/variance.hpp>

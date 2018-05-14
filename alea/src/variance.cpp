@@ -116,7 +116,7 @@ void var_acc<T,Str>::set_batch_size(size_t batch_size)
 }
 
 template <typename T, typename Str>
-void var_acc<T,Str>::add(const computed<T> &source, size_t count,
+void var_acc<T,Str>::add(const internal::computed<T> &source, size_t count,
                          var_acc<T,Str> *cascade)
 {
     internal::check_valid(*this);
