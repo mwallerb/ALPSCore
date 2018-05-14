@@ -183,6 +183,35 @@ private:
     const Eigen::DenseBase<Derived> &in_;
 };
 
+/** Adapter class that maps Eigen columns on the computed interface */
+template <typename T, typename Op>
+class custom_adapter
+    : public computed<T>
+{
+public:
+    typedef T value_type;
+
+public:
+    custom_adapter(const Op &op, size_t exp_size)
+        : op_(op)
+        , exp_size_(exp_size)
+    { }
+
+    size_t size() const { return exp_size_; }
+
+    void add_to(view<T> out) const
+    {
+        typename eigen<T>::col_map out_map(out.data(), out.size());
+        out_map += op_;
+    }
+
+    ~custom_adapter() { }
+
+private:
+    Op op_;
+    size_t exp_size_;
+};
+
 }}}  // namespace alps::alea::internal
 
 // FIXME: remove!
