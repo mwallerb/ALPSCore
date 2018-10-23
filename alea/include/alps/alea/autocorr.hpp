@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1998-2017 ALPS Collaboration. See COPYRIGHT.TXT
+ * Copyright (C) 1998-2018 ALPS Collaboration. See COPYRIGHT.TXT
  * All rights reserved. Use is subject to license terms. See LICENSE.TXT
  * For use in publications, see ACKNOWLEDGE.TXT
  */
@@ -176,6 +176,9 @@ public:
 
     /** Returns integrated auto-correlation time */
     column<var_type> tau() const;
+
+    /** Returns number of observations consistent with var/stderror */
+    double observations() const;
 
     /** Is sample size sufficient to estimate integrated auto-correlation time? */
     bool tau_available() const { return find_level(DEFAULT_MIN_SAMPLES) > 0; }

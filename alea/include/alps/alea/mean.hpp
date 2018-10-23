@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1998-2017 ALPS Collaboration. See COPYRIGHT.TXT
+ * Copyright (C) 1998-2018 ALPS Collaboration. See COPYRIGHT.TXT
  * All rights reserved. Use is subject to license terms. See LICENSE.TXT
  * For use in publications, see ACKNOWLEDGE.TXT
  */
@@ -29,6 +29,7 @@ namespace alps { namespace alea {
 // Actual declarations
 
 namespace alps { namespace alea {
+
 
 /**
  * Data which tracks only the mean/sum and the count.

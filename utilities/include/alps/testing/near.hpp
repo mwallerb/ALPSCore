@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1998-2017 ALPS Collaboration. See COPYRIGHT.TXT
+ * Copyright (C) 1998-2018 ALPS Collaboration. See COPYRIGHT.TXT
  * All rights reserved. Use is subject to license terms. See LICENSE.TXT
  * For use in publications, see ACKNOWLEDGE.TXT
  */
@@ -52,6 +52,13 @@ template <typename Derived1, typename Derived2>
                                           const Eigen::MatrixBase<Derived2> &val2,
                                           double abs_error)
 {
+    if (val1.rows() != val2.rows() || val1.cols() != val2.cols())
+        return ::testing::AssertionFailure()
+               << "Shape mismatch between " << expr1 << " and " << expr2
+               << ", where\n"  << expr1 << " is " << val1.rows() << " x " << val1.cols()
+               << " and\n" << expr2 << " is " << val2.rows() << " x " << val2.cols()
+               << "\n";
+
     if (val1.isApprox(val2, abs_error))
         return ::testing::AssertionSuccess();
 
